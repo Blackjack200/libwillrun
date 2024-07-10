@@ -1,0 +1,6 @@
+---
+name: libwillrun
+version: 0.0.1
+main: blackjack200\libwillrun\Main
+api: 5.16.1
+...
