@@ -50,7 +50,7 @@ class WillRun {
 		if (!isset(self::$getNextTick)) {
 			self::$getNextTick = fn() => $this->nextTick;
 		}
-		return self::$getNextTick->call(Server::getInstance());
+		return self::$getNextTick->call(Server::getInstance()) + self::$secondPerTick;
 	}
 
 	public static function poll() : void {
@@ -69,6 +69,7 @@ class WillRun {
 			$start = microtime(true);
 
 			$tickRemaining = $availableTime - $start;
+			var_dump($tickRemaining);
 
 			$run = $avgCallTime <= $tickRemaining || $polls >= self::$maxPolls;
 			$polls++;
