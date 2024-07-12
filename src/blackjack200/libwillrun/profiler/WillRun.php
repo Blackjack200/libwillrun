@@ -69,12 +69,15 @@ class WillRun {
 			$start = microtime(true);
 
 			$tickRemaining = $availableTime - $start;
-			var_dump($tickRemaining);
 
 			$run = $avgCallTime <= $tickRemaining || $polls >= self::$maxPolls;
 			$polls++;
 			if ($run) {
-				self::runFunction($c, $profile);
+				try {
+					self::runFunction($c, $profile);
+				} catch (\Throwable $throwable) {
+					\GlobalLogger::get()->logException($throwable);
+				}
 				unset(self::$queue[$idx]);
 			}
 			$availableTime -= microtime(true) - $start;
