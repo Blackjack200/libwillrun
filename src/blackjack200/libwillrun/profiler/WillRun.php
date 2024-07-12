@@ -13,8 +13,8 @@ class WillRun {
 	public static array $queue = [];
 	private static int $maxPolls = 10;
 
-	public static function run(Closure $c, int $depth = 0) : void {
-		$id = self::getCallerId($depth);
+	public static function run(Closure $c, int $depth = 0, ?string $caller = null) : void {
+		$id = $caller ?? self::getCallerId($depth);
 		$start = microtime(true);
 		$tickRemaining = (self::getAvailableTime() - $start);
 		if (!isset(self::$profiles[$id])) {
