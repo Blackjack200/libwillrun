@@ -7,4 +7,8 @@ namespace libwillrun {
 	function run(callable $call, ?string $caller = null) : void {
 		WillRun::run($call, 2, $caller);
 	}
+
+	function will_run(callable $call, ?string $caller = null) : void {
+		WillRun::run($call, 2, $caller);
+	}
 }
